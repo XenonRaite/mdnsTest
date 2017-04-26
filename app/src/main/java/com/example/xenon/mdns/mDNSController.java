@@ -45,7 +45,7 @@ public enum mDNSController {
         try {
             // Create a JmDNS instance
 
-            jmdns = JmDNS.create(InetAddress.getByName(Utils.getIPAddress(false)));
+            jmdns = JmDNS.create(InetAddress.getByName(Utils.getIPAddress(false)),"XenonRaite");
         } catch (IOException e) {
             e.printStackTrace();
             log("IOException " + e.getLocalizedMessage());

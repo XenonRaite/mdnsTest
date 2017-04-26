@@ -92,14 +92,14 @@ public class Utils {
 
     /**
      * Get IP address from first non-localhost interface
-     * @param ipv4  true=return ipv4, false=return ipv6
+     * @param useIPv4  true=return ipv4, false=return ipv6
      * @return  address or empty string
      */
     public static String getIPAddress(boolean useIPv4) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface intf : interfaces) {
-                List<InetAddress> addrs = Collections.list(interfaces.get(1).getInetAddresses());
+                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
 //                String sAddr = addrs.get(0).getHostAddress();
 //                int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
 //                String result = delim<0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
@@ -109,8 +109,6 @@ public class Utils {
                         String sAddr = addr.getHostAddress();
                         //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
                         boolean isIPv4 = sAddr.indexOf(':')<0;
-                        if (sAddr.contains("fe53"))
-                            continue;
                         if (useIPv4) {
                             if (isIPv4)
                                 return sAddr;
